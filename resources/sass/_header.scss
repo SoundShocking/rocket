@@ -14,7 +14,7 @@
   }
 
   &__logo {
-    margin-right: 90px;
+    // margin-right: 90px;
   }
 
   &__info {
@@ -42,7 +42,6 @@
   display: flex;
   align-items: center;
   margin-left: auto;
-  flex: 1 0 auto;
 
   &__item {
     display: flex;
@@ -71,6 +70,7 @@
     font-weight: 500;
     text-decoration: none;
     color: var(--color-black);
+    display: block;
 
     &:hover {
       text-decoration: underline;
@@ -84,6 +84,7 @@
     font-weight: 500;
     text-decoration: none;
     color: var(--color-black);
+    display: block;
 
     &:hover {
       text-decoration: underline;

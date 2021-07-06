@@ -9,5 +9,7 @@ if ($mapContactSelect.length) {
   customSelect($mapContactSelect, {
     containerClass: '_custom-select-container',
     openerClass: '_custom-select-opener',
+    panelClass: '_custom-select-panel',
+    optionClass: '_custom-select-option'
   })
 }
