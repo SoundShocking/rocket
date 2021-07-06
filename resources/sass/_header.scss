@@ -2,6 +2,14 @@
   &__top {
     border-bottom: 1px solid #ebebeb;
     padding: 20px 0;
+
+    @include md {
+      padding: 0;
+    }
+
+    .container {
+      padding: 0;
+    }
   }
 
   &__bottom {
@@ -15,6 +23,23 @@
 
   &__logo {
     // margin-right: 90px;
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    @include lg {
+      flex: 0 0 105px;
+      margin-right: 20px;
+    }
+
+    @include md {
+      padding: 0 8px;
+      border-right: 1px solid #dfdfdf;
+      height: 45px;
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__info {
@@ -32,9 +57,36 @@
     font-weight: 500;
     display: flex;
     align-items: center;
+
+    @include lg {
+      margin-left: 20px;
+    }
+
+    @include md {
+      span {
+        display: none;
+      }
+
+      width: 100px;
+      height: 45px;
+      background: var(--color-green) url('../images/phone.svg') center center
+        no-repeat;
+      border-radius: 0;
+    }
   }
 
   &__nav {
+  }
+
+  &__menu-burger {
+    display: none;
+
+    @include md {
+      display: block;
+      width: 64px;
+      height: 45px;
+      border-right: 1px solid #dfdfdf;
+    }
   }
 }
 
@@ -51,17 +103,41 @@
 
     &:not(:last-child) {
       margin-right: 15px;
+
+      @include md {
+        margin-right: 10px;
+      }
+    }
+
+    &:nth-child(1) {
+      @include md {
+        width: 250px;
+      }
+    }
+
+    &:nth-child(2) {
+      @include md {
+        display: none;
+      }
     }
   }
 
   &__icon {
     margin-right: 15px;
+
+    @include md {
+      margin-right: 10px;
+    }
   }
 
   &__text {
     font-size: 15px;
     font-weight: 500;
     color: var(--color-black);
+
+    @include md {
+      font-size: 14px;
+    }
   }
 
   &__phone {
@@ -115,6 +191,12 @@
 
     &:last-child {
       padding-right: 0;
+    }
+
+    @include md {
+      padding: 0;
+      flex: 1 0 auto;
+      text-align: center;
     }
   }
 
