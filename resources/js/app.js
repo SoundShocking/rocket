@@ -134,6 +134,18 @@ ymaps.ready(function () {
   myMap.controls.remove('fullscreenControl');
   myMap.controls.remove('rulerControl');
   myMap.behaviors.disable(['scrollZoom']);
+
+  if (window.innerWidth < 768) {
+    let pixelCenter = myMap.getGlobalPixelCenter('map');
+    pixelCenter = [
+      pixelCenter[0],
+      pixelCenter[1] - 400
+    ];
+    const geoCenter = myMap.options.get('projection').fromGlobalPixels(pixelCenter, myMap.getZoom());
+    myMap.setCenter(geoCenter);
+    console.log('pixelCenter: ', pixelCenter);
+  }
+
 });
 
 const $equipmentTabsSelect = document.querySelectorAll('.equipment-tabs__select');
@@ -151,6 +163,8 @@ const selectEquipment = document.getElementById('select_equipment').customSelect
 const subTabs = ['Рентгенология', 'Томография', 'Урология', 'Физиотерапия', 'Дезинфекция', 'Косметология', 'Лаборатория'];
 
 selectService.select.addEventListener('change', (e) => {
+  e.target.closest('._custom-select-container').querySelector('._custom-select-opener').classList.add('is-selected')
+
   const $tab = document.getElementById(e.target.value);
   if ($tab) {
     $equipmentTabsBodyTab.forEach(el => el.classList.remove('equipment-tabs-body__tab--active'));
@@ -167,6 +181,8 @@ selectService.select.addEventListener('change', (e) => {
 })
 
 selectEquipment.select.addEventListener('change', e => {
+  e.target.closest('._custom-select-container').querySelector('._custom-select-opener').classList.add('is-selected')
+
   console.log(e.target.value)
 
   const $activeSubTab = document.getElementById(e.target.value).closest('.equipment-tabs-body__right').querySelector('.equipment-tabs-body__subtab--active');
@@ -185,4 +201,11 @@ $headerMenuBurger.addEventListener('click', e => {
 const $headerMenuClose = document.querySelector('.header-menu .header__menu-burger');
 $headerMenuClose.addEventListener('click', e => {
   $headerMenu.classList.remove('header-menu--active');
+})
+
+const $aboutCompanyShowMore = document.querySelector('.about-company__show-more');
+const $aboutCompanyText = document.querySelector('.about-company__text');
+$aboutCompanyShowMore.addEventListener('click', e => {
+  $aboutCompanyShowMore.remove();
+  $aboutCompanyText.classList.add('about-company__text--show');
 })

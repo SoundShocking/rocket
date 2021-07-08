@@ -1,8 +1,55 @@
 <div class="modal fade" id="modalOrder" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-fullscreen-sm-down">
+  <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content modal-order">
       <div class="modal-body modal-order__body">
+        <button class="modal__close" data-bs-dismiss="modal"></button>
 
+        <div class="modal-order__title">
+          Заказать
+        </div>
+
+        <form class="modal-order__form">
+          <div class="modal-order__form-control">
+            <input type="text" class="modal-order__input" placeholder="Имя">
+          </div>
+          <div class="modal-order__form-control">
+            <input type="tel" class="modal-order__input" placeholder="Телефон">
+          </div>
+          <div class="modal-order__form-control">
+            <input type="email" class="modal-order__input" placeholder="Почта">
+          </div>
+
+          <button type="submit" class="modal-order__submit">
+            Отправить
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalCallback" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content modal-order">
+      <div class="modal-body modal-order__body">
+        <button class="modal__close" data-bs-dismiss="modal"></button>
+
+        <div class="modal-order__title">
+          Заказать звонок
+        </div>
+
+        <form class="modal-order__form">
+          <div class="modal-order__form-control">
+            <input type="text" class="modal-order__input" placeholder="Имя">
+          </div>
+          <div class="modal-order__form-control">
+            <input type="tel" class="modal-order__input" placeholder="Телефон">
+          </div>
+
+          <button type="submit" class="modal-order__submit">
+            Заказать звонок
+          </button>
+        </form>
       </div>
     </div>
   </div>
