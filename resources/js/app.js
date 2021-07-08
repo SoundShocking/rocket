@@ -37,7 +37,7 @@ if ($equipmentTabsCarousel.length) {
   $equipmentTabsCarousel.forEach(el => {
     new Swiper(el.querySelector('.equipment-tabs-body__slider'), {
       loop: true,
-      slidesPerView: 3,
+      slidesPerView: 1,
       spaceBetween: 25,
       navigation: {
         nextEl: el.querySelector('.equipment-tabs-body__slider-next'),
@@ -50,6 +50,11 @@ if ($equipmentTabsCarousel.length) {
       },
       observer: true,
       observeParents: true,
+      breakpoints: {
+        768: {
+          slidesPerView: 3
+        }
+      }
     })
   })
 }
@@ -79,8 +84,7 @@ if ($aboutCompanySlider) {
   new Swiper($aboutCompanySlider, {
     loop: true,
     spaceBetween: 30,
-    slidesPerView: 3,
-    width: 756,
+    slidesPerView: 1,
     pagination: {
       el: $aboutCompanySlider.querySelector('.swiper-pagination'),
       type: 'bullets',
@@ -89,6 +93,96 @@ if ($aboutCompanySlider) {
     navigation: {
       nextEl: document.querySelector('.about-company__slider-next'),
       prevEl: document.querySelector('.about-company__slider-prev'),
+    },
+    breakpoints: {
+      1200: {
+        width: 756,
+        slidesPerView: 3
+      }
     }
   })
 }
+
+ymaps.ready(function () {
+  const myMap = new ymaps.Map('map', {
+    center: [55.751574, 37.573856],
+    zoom: 9
+  });
+
+  const myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+    hintContent: 'Собственный значок метки',
+    balloonContent: 'Это красивая метка'
+  }, {
+    // Опции.
+    // Необходимо указать данный тип макета.
+    iconLayout: 'default#image',
+    // Своё изображение иконки метки.
+    iconImageHref: 'assets/images/map-marker-icon.svg',
+    // Размеры метки.
+    iconImageSize: [30, 42],
+    // Смещение левого верхнего угла иконки относительно
+    // её "ножки" (точки привязки).
+    iconImageOffset: [-5, -38]
+  });
+
+  myMap.geoObjects.add(myPlacemark);
+
+  myMap.controls.remove('geolocationControl');
+  myMap.controls.remove('searchControl');
+  myMap.controls.remove('trafficControl');
+  myMap.controls.remove('typeSelector');
+  myMap.controls.remove('fullscreenControl');
+  myMap.controls.remove('rulerControl');
+  myMap.behaviors.disable(['scrollZoom']);
+});
+
+const $equipmentTabsSelect = document.querySelectorAll('.equipment-tabs__select');
+
+customSelect($equipmentTabsSelect, {
+  containerClass: '_custom-select-container',
+  openerClass: '_custom-select-opener',
+  panelClass: '_custom-select-panel',
+  optionClass: '_custom-select-option'
+})
+
+const selectService = document.getElementById('select_service').customSelect;
+const selectEquipment = document.getElementById('select_equipment').customSelect;
+
+const subTabs = ['Рентгенология', 'Томография', 'Урология', 'Физиотерапия', 'Дезинфекция', 'Косметология', 'Лаборатория'];
+
+selectService.select.addEventListener('change', (e) => {
+  const $tab = document.getElementById(e.target.value);
+  if ($tab) {
+    $equipmentTabsBodyTab.forEach(el => el.classList.remove('equipment-tabs-body__tab--active'));
+    $tab.classList.add('equipment-tabs-body__tab--active');
+
+    selectEquipment.empty();
+    subTabs.forEach((tab, i) => {
+      const option = document.createElement('option');
+      option.text = tab;
+      option.value = `${e.target.value}_${i + 1}`;
+      selectEquipment.append(option);
+    })
+  }
+})
+
+selectEquipment.select.addEventListener('change', e => {
+  console.log(e.target.value)
+
+  const $activeSubTab = document.getElementById(e.target.value).closest('.equipment-tabs-body__right').querySelector('.equipment-tabs-body__subtab--active');
+  if ($activeSubTab) $activeSubTab.classList.remove('equipment-tabs-body__subtab--active');
+
+  const $tab = document.getElementById(e.target.value);
+  if ($tab) $tab.classList.add('equipment-tabs-body__subtab--active');
+})
+
+const $headerMenuBurger = document.querySelector('.header__menu-burger');
+const $headerMenu = document.querySelector('.header__menu');
+$headerMenuBurger.addEventListener('click', e => {
+  $headerMenu.classList.add('header-menu--active');
+})
+
+const $headerMenuClose = document.querySelector('.header-menu .header__menu-burger');
+$headerMenuClose.addEventListener('click', e => {
+  $headerMenu.classList.remove('header-menu--active');
+})

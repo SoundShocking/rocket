@@ -7,6 +7,12 @@
     min-height: 50px;
     justify-content: space-between;
     position: relative;
+
+    @include sm {
+      flex-direction: column;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
   }
 
   &__copyright {
@@ -20,6 +26,14 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    @include sm {
+      position: relative;
+      top: unset;
+      left: unset;
+      transform: translate(0, 0);
+      margin-top: 15px;
+    }
   }
 
   &__made-by {
@@ -33,6 +47,10 @@
     img {
       display: block;
       margin-left: 10px;
+    }
+
+    @include sm {
+      display: none;
     }
   }
 }
